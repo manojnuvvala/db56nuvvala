@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1= title 
+    - let palaces=[{palacename:"Buckingham palace",location:"London",constructed_year:"1703"},{palacename:"Winter Palace",location:"Russia",constructed_year:"1708"},{palacename:"Mysore Palace",location:"India",constructed_year:"1897"}]
+    div(class="container-fluid mt-3")
+    div(class="row")
+        each palace,index in palaces
+            div(class="col-sm-4 bg-warning m-1 p-3" onclick=`buy(${index})`) #{palace.palacename} - #{palace.location} - #{palace.constructed_year}
+    script.
+     
+      function buy(itemNo)
+      {
+        alert(`You purchased Item ${itemNo+1}`)
+      }
+      
