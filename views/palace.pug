@@ -2,7 +2,8 @@ extends layout
 
 block content
     h1= title 
-    - let palaces=[{palacename:"Buckingham palace",location:"London",constructed_year:"1703"},{palacename:"Winter Palace",location:"Russia",constructed_year:"1708"},{palacename:"Mysore Palace",location:"India",constructed_year:"1897"}]
+    //- let palaces=[{palacename:"Buckingham palace",location:"London",constructed_year:"1703"},{palacename:"Winter Palace",location:"Russia",constructed_year:"1708"},{palacename:"Mysore Palace",location:"India",constructed_year:"1897"}]
+    - let palaces = results
     div(class="container-fluid mt-3")
     div(class="row")
         each palace,index in palaces
