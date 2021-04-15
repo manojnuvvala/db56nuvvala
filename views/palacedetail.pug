@@ -1,25 +1,27 @@
 extends layout
 
 block content
-  h1= title
-
-  - let palaceid = toShow._id
-  - let palacename = toShow.palacename
-  - let location = toShow.location
-  - let constructed_year = toShow.constructed_year
-  div
-    div.row
-      div(class='palaceAttr mr-3') palace ID is:
-      div #{palaceid}
-    div.row
-      div(class='palaceAttr mr-3') palacename is:
-      div #{palacename}
-    div.row
-      div(class='palaceAttr mr-3') location is:
-      div #{location}
-    div.row
-      div(class='palaceAttr mr-3') constructed_year is:
-      div #{constructed_year}
+  h1(id='palacetitle')= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+      - let palaceid = toShow._id
+      - let palacename = toShow.palacename
+      - let location = toShow.location
+      - let constructed_year = toShow.constructed_year
+      div
+        div.row
+          div(class='palaceAttr mr-3') palace ID is:
+          div(class='palacevalues') #{palaceid}
+        div.row
+          div(class='palaceAttr mr-3') palacename is:
+          div(class="palacevalues") #{palacename}
+        div.row
+          div(class='palaceAttr mr-3') location is:
+          div(class="palacevalues") #{location}
+        div.row
+          div(class='palaceAttr mr-3') constructed_year is:
+          div(class="palacevalues") #{constructed_year}
 
 
 

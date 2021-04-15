@@ -7,5 +7,33 @@ a {
   color: #00B7FF;
 }
 .palaceAttr {
-    background-color: aquamarine;  width: 120px;
-  }
+  background-color:cadetblue;
+  width: 200px;
+  margin: 5px;
+  text-align: center;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bolder;
+
+}
+#palacetitle{
+  color: #123456;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.palacevalues{
+  margin: 2px;
+  padding: 10px;
+  justify-content:center;
+  font-weight: bold;
+  background-color:aquamarine;
+  border-radius: 1px;
+  width: 30%;
+}
+
+.values:hover{
+  background-color:cadetblue;
+  color: black;
+}

@@ -2,43 +2,45 @@ extends layout
 
 block content
   h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+        - let palaceid = toShow._id
+        - let palacename = toShow.palacename
+        - let location = toShow.location
+        - let constructed_year = toShow.constructed_year
+      
+        div.row(class='mb-2')
+          div.mr-1 ID is
+          div #{palaceid}
+        - let actionid = "/resource/resource/palaces/" + palaceid
+        form(id='palaceForm', action= actionid, method="PUT")
+          div.form-group
+              label.palaceAttr(for='palacename') palacename
+              input#palacename(type='text', name='palacename', value= palacename )
+          div.form-group
+              label.palaceAttr(for='location') location 
+              input#location(type='text', name='location', value= location )
+          div.form-group
+              label.palaceAttr(for='constructed_year') palace cost
+              input#constructed_year(type='number', name='constructed_year', value= constructed_year )
+          input(type="submit")
 
-  - let palaceid = toShow._id
-  - let palacename = toShow.palacename
-  - let location = toShow.location
-  - let constructed_year = toShow.constructed_year
-  
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{palaceid}
-  - let actionid = "/resource/resource/palaces/" + palaceid
-  form(id='palaceForm', action= actionid, method="PUT")
-    div.form-group
-        label.palaceAttr(for='palacename') palacename
-        input#palacename(type='text', name='palacename', value= palacename )
-    div.form-group
-        label.palaceAttr(for='location') location 
-        input#location(type='text', name='location', value= location )
-    div.form-group
-        label.palaceAttr(for='constructed_year') palace cost
-        input#constructed_year(type='number', name='constructed_year', value= constructed_year )
-    input(type="submit")
-
-  script.
-    document.forms['palaceForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
-      // TODO do something here to show user that form is being submitted
-      fetch(event.target.action, {
-        method: 'PUT',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-      }).then((resp) => {
-        return resp.json(); // or resp.text() or whatever the server sends
-      }).then((body) => {
-        alert("Update succeded")
-        // TODO handle body
-      }).catch((error) => {
-        // TODO handle error
-        alert("Update failed " + error )
-      });
-    });
+        script.
+          document.forms['palaceForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+              method: 'PUT',
+              body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then((resp) => {
+              return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+              alert("Update succeded")
+              // TODO handle body
+            }).catch((error) => {
+              // TODO handle error
+              alert("Update failed " + error )
+            });
+          });
 
