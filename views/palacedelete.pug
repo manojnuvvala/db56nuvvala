@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  h1= title
+
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let palaceid = toShow._id
+    - let palacename = toShow.palacename
+    - let location = toShow.location
+    - let constructed_year = toShow.constructed_year
+    - let actionid = "/resource/resource/palaces/" + palaceid
+    script let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='palaceAttr mr-3') palace ID is:
+        div #{palaceid}
+      div.row
+        div(class='palaceAttr mr-3') palacename is:
+        div #{palacename}
+      div.row
+        div(class='palaceAttr mr-3') location  is:
+        div #{location}
+      div.row
+        div(class='palaceAttr mr-3') constructed_year  is:
+        div #{constructed_year}
+
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+  script.
+    function cancel() {
+      // Go back to the home page for the palace collection
+      window.location.href='/palace'
+    }
+  script.
+    function deleteOnid() {
+      console.log("starting delete")
+      // delete first
+      fetch(actionid, {
+        method: 'DELETE'      // Don't need a body for the delete
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Delete succeded")
+        window.location.href='/palace'
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Delete failed " + error )
+      });
+    }
+
