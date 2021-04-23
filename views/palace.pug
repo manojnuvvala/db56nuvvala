@@ -1,17 +1,30 @@
 extends layout
 
 block content
-    h1= title 
-    //- let palaces=[{palacename:"Buckingham palace",location:"London",constructed_year:"1703"},{palacename:"Winter Palace",location:"Russia",constructed_year:"1708"},{palacename:"Mysore Palace",location:"India",constructed_year:"1897"}]
-    - let palaces = results
-    div(class="container-fluid")
-    div(class="row m-1")
-        each palace,index in palaces
-          - let destination = `dispatch(\"/palaces/update?id=${palace._id}\")`
-            div(class="col-sm-4 bg-warning m-1 p-3" onclick=`buy(${index})`) #{palace.palacename} - #{palace.location} - #{palace.constructed_year}
-              button.btn( class="btn-primary ml-1", onclick= destination) Update
-    script.
-      function dispatch(path){
+  h1= title 
+  //- let palaces=[{palacename:"Buckingham palace",location:"London",constructed_year:"1703"},{palacename:"Winter Palace",location:"Russia",constructed_year:"1708"},{palacename:"Mysore Palace",location:"India",constructed_year:"1897"}]
+  - let palaces = results
+  - let destinationcreate = `dispatchCreate(\"/palaces/create\")`
+  div(class="container-fluid")
+    button.btn( class="btn-primary ml-1 btn-lg", onclick= destinationcreate) Create
+
+  div(class="row m-1")
+    each palace,index in palaces
+      - let destinationupdate = `dispatch(\"/palaces/update?id=${palace._id}\")`
+      - let destinationdetail =   `dispatch(\"/palaces/detail?id=${palace._id}\")`
+      - let destinationdelete = `dispatchDelete(\"/palaces/delete?id=${palace._id}\")`
+        div(class="col-sm-4 bg-warning m-1 p-3" onclick=`buy(${index})`) #{palace.palacename} - #{palace.location} - #{palace.constructed_year}
+          button.btn( class="btn-light ml-1", onclick= destinationdetal) Detail
+          button.btn( class="btn-dark ml-1", onclick= destinationupdate) Update
+          button.btn( class="btn-danger ml-1", onclick= destinationdelete) Delete
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
+  
+    function dispatchCreate(path){
         window.location.href=path
-      }
-      
+    }
+    function dispatchDelete(path){
+        window.location.href=path
+    }

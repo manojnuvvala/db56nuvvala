@@ -43,7 +43,14 @@ passport.use(new LocalStrategy(
       return done(null, user);
     });
   }));
-
+  app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+   }));
+   app.use(passport.initialize());
+   app.use(passport.session());
+   app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -94,8 +101,8 @@ async function recreateDB() {
   await palace.deleteMany();
 let instance1 = new palace({
   palacename: "Mysore palace",
-  location: 'large',
-  constructed_year: 3000
+  location: 'mysore',
+  constructed_year: 1897
   });
 instance1.save(function (err, doc) {
     if (err) return console.error(err);
@@ -104,17 +111,17 @@ instance1.save(function (err, doc) {
 
 let instance2 = new palace({
   palacename: "Buckingham palace",
-  location: 'large',
-  constructed_year: 80000
+  location: 'london',
+  constructed_year: 1703
 });
 instance2.save(function (err, doc) {
   if (err) return console.error(err);
   console.log("Second object saved")
 });
 let instance3 = new palace({
-  palacename: "White palace",
-  location: 'large',
-  constructed_year: 30000
+  palacename: "Winter palace",
+  location: 'russia',
+  constructed_year: 1792
 });
 instance3.save(function (err, doc) {
   if (err) return console.error(err);
